@@ -165,7 +165,7 @@ class Noeud:
 		if ( self.feuille):
 			return self.y  
 		else : 
-			#Test xk <= get/seuil
+			Test xk <= get_seuils(X, self.composant)
 				return self.fils1.pred(x)
 				return self.fils2.pred(x)
 
@@ -357,3 +357,4 @@ plt.show()
 
 
 
+print(str(arbre))
