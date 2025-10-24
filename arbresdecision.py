@@ -80,8 +80,21 @@ def coupe(X, y, critere="erreur", foret_aleatoire=-1):
 	for composant in d : 
 		s = get_seuils(X,d)
 		for seuil in s : 
-			I1 = X[:,d] <= s : 
-				impurete = n1 * err1 + n2 * err2 
+			I1 = X[:,d] <= s
+
+			#Nombre dans l1
+			lenL1 = np.sum(I1);	
+			
+			I2 = X[d,:] > s
+			
+			#Nombre dans L2 
+			lenL2 = np.sum(I2)
+			
+			ErreurL1 = 0
+			for i in range (0,lenL1) :
+				if I1[i] < categorie_majoritaire(I1)
+
+			#impurete = n1 * err1 + n2 * err2 
 			
 	
 	return (coupe_k,coupe_s)
