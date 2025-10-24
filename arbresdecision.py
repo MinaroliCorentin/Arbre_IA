@@ -137,15 +137,17 @@ class Noeud:
 
 		self.categorie, erreur = categorie_majoritaire(y)
 
-		if ( erreur <= tol ): 
+		if ( erreur < tol ):
 			self.feuille = True
 
 		if ( self.feuille == True ):
-			self.y = y 
+			etiquette = self.etiquette
 		else :
-			coupe(X,y,critere="erreur", foret_aleatoire=-1)
-			self.fils1 = Noeud (profondeur +1,X,y,tol,critere="erreur", foret_aleatoire=-1)
-			self.fils2 = Noeud (profondeur +1,X,y,tol,critere="erreur", foret_aleatoire=-1)
+			k,s = coupe(X,y,critere="erreur", foret_aleatoire=-1)
+
+			if ( k < s): 
+				self.fils1 = Noeud (profondeur +1,X,y,tol,critere="erreur", foret_aleatoire=-1)
+				self.fils2 = Noeud (profondeur +1,X,y,tol,critere="erreur", foret_aleatoire=-1)
 			
 
 
