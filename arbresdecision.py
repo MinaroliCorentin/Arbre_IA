@@ -72,10 +72,17 @@ def coupe(X, y, critere="erreur", foret_aleatoire=-1):
 	"""
 	m, d = X.shape # nombre, dimension des données
 	
+	meilleur_imp = np.inf
+
 	coupe_k = 0
 	coupe_s = 0
 	
-	# à compléter...
+	for composant in d : 
+		s = get_seuils(X,d)
+		for seuil in s : 
+			I1 = X[:,d] <= s : 
+				impurete = n1 * err1 + n2 * err2 
+			
 	
 	return (coupe_k,coupe_s)
 	
