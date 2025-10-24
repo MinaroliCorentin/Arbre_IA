@@ -19,15 +19,16 @@ def categorie_majoritaire(y):
 	"""
 	categorie = -1
 	erreur = 0
-
 	Q = max(y) + 1
-	Z = min(y) + 1
-
-	erreur = float(Q / Z)	 
-
+	p = np.zeros(Q)
+	for i in range (Q) :
+		
+		#Tableau de boolean 
+		#Valeur avec 1 si égalité, 0 sinon
+		p[i] = np.mean(y == i)
 	
-	# à compléter... 
-	
+	categorie = np.argmax(p)
+	erreur = 1 - p[categorie]
 	return (categorie, erreur)
 	
 
