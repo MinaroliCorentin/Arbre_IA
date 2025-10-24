@@ -77,25 +77,29 @@ def coupe(X, y, critere="erreur", foret_aleatoire=-1):
 	coupe_k = 0
 	coupe_s = 0
 	
-	for composant in d : 
-		s = get_seuils(X,d)
+	for k in range (d) : 
+		s = get_seuils(X,k)
 		for seuil in s : 
-			I1 = X[:,d] <= s
+
+			I1 = X[:,k] <= seuil
 
 			#Nombre dans l1
 			lenL1 = np.sum(I1);	
 			
-			I2 = X[d,:] > s
+			I2 = X[k,:] > seuil
 			
 			#Nombre dans L2 
 			lenL2 = np.sum(I2)
 			
-			ErreurL1 = 0
-			for i in range (0,lenL1) :
-				if I1[i] < categorie_majoritaire(I1)
+			FilsGauche, ErreurGauche = categorie_majoritaire(I1)
+			FilsDroite, ErreurDroite = categorie_majoritaire(I2)
 
-			#impurete = n1 * err1 + n2 * err2 
+			impurete = lenL1 * ErreurGauche + lenL2 * ErreurDroite 
 			
+			if ( impurete < meilleur_imp ): 
+				meilleur_imp = impurete
+				coupe_k = k
+				coupe_s = s
 	
 	return (coupe_k,coupe_s)
 	
@@ -135,6 +139,8 @@ class Noeud:
 
 		if self.fils1 and self.fils2 == None : 
 			self.feuille = False
+		else : 
+			self.feuille = True
 		
 		self.fils1 = Noeud (profondeur +1)
 		self.fils2 = Noeud (profondeur +1)
