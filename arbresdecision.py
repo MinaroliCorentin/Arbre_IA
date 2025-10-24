@@ -131,19 +131,23 @@ class Noeud:
 
 
 		self.profondeur = profondeur
-		self.x = X
-		self.y = y 
+		self.X = X
 		self.tol = tol 
 		
-		self.etiquette = categorie_majoritaire(y)
 
-		if self.fils1 and self.fils2 == None : 
-			self.feuille = False
-		else : 
+		self.categorie, erreur = categorie_majoritaire(y)
+
+		if ( erreur <= tol ): 
 			self.feuille = True
-		
-		self.fils1 = Noeud (profondeur +1)
-		self.fils2 = Noeud (profondeur +1)
+
+		if ( self.feuille == True ):
+			self.y = y 
+		else :
+			coupe(X,y,critere="erreur", foret_aleatoire=-1)
+			self.fils1 = Noeud (profondeur +1,X,y,tol,critere="erreur", foret_aleatoire=-1)
+			self.fils2 = Noeud (profondeur +1,X,y,tol,critere="erreur", foret_aleatoire=-1)
+			
+
 
 		# à compléter pour remplir tous les champs... 
 		
