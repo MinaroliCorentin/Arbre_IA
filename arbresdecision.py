@@ -133,7 +133,6 @@ class Noeud:
 		self.profondeur = profondeur
 		self.X = X
 		self.tol = tol 
-		
 
 		self.categorie, erreur = categorie_majoritaire(y)
 
@@ -143,13 +142,15 @@ class Noeud:
 		if ( self.feuille == True ):
 			etiquette = self.etiquette
 		else :
-			k,s = coupe(X,y,critere="erreur", foret_aleatoire=-1)
-
-			if ( k < s): 
-				self.fils1 = Noeud (profondeur +1,X,y,tol,critere="erreur", foret_aleatoire=-1)
-				self.fils2 = Noeud (profondeur +1,X,y,tol,critere="erreur", foret_aleatoire=-1)
+			self.composant,self.seuil = coupe(X,y,critere="erreur", foret_aleatoire=-1)
 			
+			gauche = X[: , self.composant] <= self.seuil
+			droite = X[: , self.composant] > self.seuil
 
+			if ( self.composant < self.seuil): 
+				self.fils1 = Noeud (profondeur +1,X[gauche],y[gauche],tol,critere="erreur", foret_aleatoire=-1)
+				self.fils2 = Noeud (profondeur +1,X[droite],y[droite],tol,critere="erreur", foret_aleatoire=-1)
+			
 
 		# à compléter pour remplir tous les champs... 
 		
@@ -160,7 +161,14 @@ class Noeud:
 			Pour une feuille : retourne l'étiquette de la feuille
 			Pour un autre noeud : retourne la prédiction d'un des deux fils
 		"""
-		
+
+		if ( self.feuille):
+			#return y  
+		else : 
+			#Test xk <= get/seuil
+				return self.fils1.pred(x)
+				return self.fils2.pred(x)
+
 		prediction = 0	# à modifier...
 		
 		return prediction
