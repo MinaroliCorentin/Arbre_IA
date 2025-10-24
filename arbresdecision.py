@@ -163,7 +163,7 @@ class Noeud:
 		"""
 
 		if ( self.feuille):
-			#return y  
+			return self.y  
 		else : 
 			#Test xk <= get/seuil
 				return self.fils1.pred(x)
